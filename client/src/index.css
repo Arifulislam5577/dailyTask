@@ -4,13 +4,15 @@
 @tailwind components;
 @tailwind utilities;
 
-/* #725043,#323C53 */
+/* #a15638,#2f2e41 */
 
 body {
   font-family: "Poppins", sans-serif;
   font-weight: 400;
-  background-image: linear-gradient(to left top, #323c53 0%, #725043 90%);
-  background-repeat: no-repeat;
   height: 100vh;
   width: 100%;
+}
+
+.bg {
+  background-color: #2f2e41;
 }
