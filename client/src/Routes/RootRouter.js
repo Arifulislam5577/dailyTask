@@ -5,8 +5,10 @@ import AddTask from "../pages/AddTask/AddTask";
 import CompletedTask from "../pages/CompletedTask/CompletedTask";
 import Dashboard from "../pages/Dashboard/DashBoard";
 import Home from "../pages/Home/Home";
+import Login from "../pages/Login/Login";
 import MediaTask from "../pages/MediaTask/MediaTask";
 import MyTask from "../pages/MyTask/MyTask";
+import SignIn from "../pages/SignIn/SignIn";
 const RootRouter = createBrowserRouter([
   {
     path: "/",
@@ -14,6 +16,8 @@ const RootRouter = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "/addTask", element: <AddTask /> },
+      { path: "/login", element: <Login /> },
+      { path: "/signin", element: <SignIn /> },
       {
         path: "/myTask",
         element: <Dashboard />,
