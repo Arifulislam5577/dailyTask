@@ -12,7 +12,7 @@ const Hero = () => {
         libero exercitationem voluptate fugiat? Culpa.
       </p>
 
-      <button className="text-sm px-8 py-3 rounded-full bg-primary mt-3 text-white shadow-2xl animate-pulse">
+      <button className="text-sm px-8 py-3 rounded-full dark:bg-red-500 mt-3 text-white shadow-2xl animate-">
         Join With Us
       </button>
     </div>
