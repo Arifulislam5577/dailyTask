@@ -2,7 +2,7 @@ import React from "react";
 
 const Hero = () => {
   return (
-    <div className=" flex items-center justify-center  lg:py-20 flex-col text-center">
+    <div className=" flex items-center justify-center  min-h-[70vh] flex-col text-center">
       <h1 className="lg:text-5xl text-3xl mb-2 tracking-wide text-secondary dark:text-white font-bold">
         What is there in life?
       </h1>

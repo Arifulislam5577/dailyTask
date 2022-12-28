@@ -4,7 +4,7 @@ const AddMedia = () => {
   return (
     <div>
       <div className=" rounded bg-gray-200 overflow-hidden">
-        <img src="https://picsum.photos/1920/720" alt="" />
+        <img src="https://picsum.photos/1920/500" alt="" />
       </div>
       <div className="lg:w-1/2 md:w-2/3 w-4/5 mx-auto">
         <form className="-mt-20 ">

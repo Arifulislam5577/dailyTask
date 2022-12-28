@@ -10,7 +10,7 @@ const TaskLayout = () => {
           Noteworthy technology acquisitions 2021
         </h5>
 
-        <button class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-slate-700 rounded  ">
+        <button class="inline-flex items-center px-5 py-2 text-xs font-medium text-center text-white bg-slate-700 rounded-full  ">
           Read more
           <svg
             aria-hidden="true"
