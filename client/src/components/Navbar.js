@@ -3,10 +3,12 @@ import { Link, useLocation } from "react-router-dom";
 import { BsSun } from "react-icons/bs";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { FaTimes } from "react-icons/fa";
-
+import { useDispatch, useSelector } from "react-redux";
+import { logOut } from "../redux/services/authService";
 const Navbar = () => {
   const [showNav, setShowNav] = useState(false);
   const location = useLocation();
+  const { user } = useSelector((state) => state.auth);
   useEffect(() => {
     setShowNav(false);
   }, [location.pathname]);
@@ -15,6 +17,12 @@ const Navbar = () => {
     window.addEventListener("scroll", () => {
       setShowNav(false);
     });
+
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logOut);
+  };
   return (
     <header className="py-8">
       <div className="container flex items-center justify-between">
@@ -34,12 +42,21 @@ const Navbar = () => {
             <Link to="/completed">Completed Task</Link>
           </li>
           <li>
-            <Link
-              to="/login"
-              className="px-8 py-2.5 dark:bg-red-500  rounded-full"
-            >
-              Join Us
-            </Link>
+            {user ? (
+              <button
+                onClick={handleLogout}
+                className="px-8 py-2.5 dark:bg-red-500  rounded-full"
+              >
+                Logout
+              </button>
+            ) : (
+              <Link
+                to="/login"
+                className="px-8 py-2.5 dark:bg-red-500  rounded-full"
+              >
+                Join Us
+              </Link>
+            )}
           </li>
 
           <li>
@@ -79,12 +96,21 @@ const Navbar = () => {
             <Link to="/completed">Completed Task</Link>
           </li>
           <li>
-            <Link
-              to="/login"
-              className="px-8 py-2.5 dark:bg-red-500  rounded-full"
-            >
-              Join Us
-            </Link>
+            {user ? (
+              <button
+                onClick={handleLogout}
+                className="px-8 py-2.5 dark:bg-red-500  rounded-full"
+              >
+                Logout
+              </button>
+            ) : (
+              <Link
+                to="/login"
+                className="px-8 py-2.5 dark:bg-red-500  rounded-full"
+              >
+                Join Us
+              </Link>
+            )}
           </li>
         </ul>
       </div>

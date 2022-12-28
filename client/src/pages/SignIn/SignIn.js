@@ -1,7 +1,32 @@
-import React from "react";
-import { Link } from "react-router-dom";
-
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { createNewUser } from "../../redux/services/authService";
+import useRedirect from "../../hooks/useRedirect";
+import ShowError from "../../components/ShowError";
 const SignIn = () => {
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const dispatch = useDispatch();
+  const { loading, error, user } = useSelector((state) => state.auth);
+  const redirect = useRedirect();
+  const navigate = useNavigate();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = {
+      name,
+      email,
+      password,
+    };
+    dispatch(createNewUser(data));
+  };
+
+  useEffect(() => {
+    if (user) {
+      navigate(redirect);
+    }
+  }, [redirect, user, navigate]);
   return (
     <section className="py-10">
       <div className="px-6 h-full text-gray-200">
@@ -14,7 +39,8 @@ const SignIn = () => {
             />
           </div>
           <div className="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
-            <form>
+            <form onSubmit={handleSubmit}>
+              {error && <ShowError message={error} />}
               <div className="flex flex-row items-center justify-center lg:justify-start">
                 <p className="text-lg mb-0 mr-4">Sign in with</p>
                 <button
@@ -82,6 +108,9 @@ const SignIn = () => {
                   className="form-control block w-full px-4 py-2.5 text-base placeholder:text-gray-300 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   id="exampleFormControlInput2"
                   placeholder="Your Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
                 />
               </div>
               <div className="mb-6">
@@ -90,6 +119,9 @@ const SignIn = () => {
                   className="form-control block w-full px-4 py-2.5 text-base placeholder:text-gray-300 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   id="exampleFormControlInput2"
                   placeholder="Email address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
                 />
               </div>
 
@@ -99,6 +131,9 @@ const SignIn = () => {
                   className="form-control block w-full px-4 py-2.5 text-base placeholder:text-gray-300 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   id="exampleFormControlInput2"
                   placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
                 />
               </div>
 
@@ -111,7 +146,7 @@ const SignIn = () => {
                   />
                   <label
                     className="form-check-label inline-block text-gray-100"
-                    for="exampleCheck2"
+                    htmlFor="exampleCheck2"
                   >
                     Remember me
                   </label>
@@ -123,10 +158,11 @@ const SignIn = () => {
 
               <div className="text-center lg:text-left">
                 <button
-                  type="button"
+                  disabled={loading}
+                  type="submit"
                   className="inline-block px-7 py-3 bg-red-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-red-600  transition duration-150 ease-in-out"
                 >
-                  SignIn
+                  {loading ? "Loading..." : "SignIn"}
                 </button>
                 <p className="text-sm  mt-2 pt-1 mb-0">
                   Already have an account?
