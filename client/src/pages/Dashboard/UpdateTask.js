@@ -25,7 +25,7 @@ const UpdateTask = () => {
 
   useEffect(() => {
     if (success) {
-      status === "1" ? navigate("/completed") : navigate("/myTask");
+      status === "completed" ? navigate("/completed") : navigate("/myTask");
       dispatch(reset());
     }
   }, [success, navigate, status, dispatch]);

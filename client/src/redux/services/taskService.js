@@ -47,7 +47,7 @@ export const getTask = createAsyncThunk(
       const user = thunkAPI.getState().auth.user._id;
 
       const { data } = await axios.get(
-        `http://localhost:5000/api/v1/task?userId=${user}&isCompleted=false`,
+        `http://localhost:5000/api/v1/task?userId=${user}&isCompleted=${task}`,
         config
       );
       return data;
@@ -66,7 +66,6 @@ export const updateTask = createAsyncThunk(
   "Task/updateTask",
   async (taskData, thunkAPI) => {
     const { id, task, isCompleted } = taskData;
-    console.log(taskData);
     try {
       const config = {
         headers: {
@@ -81,6 +80,34 @@ export const updateTask = createAsyncThunk(
           task,
           isCompleted,
         },
+        config
+      );
+      return data;
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const deleteTask = createAsyncThunk(
+  "Task/deleteTask",
+  async (taskId, thunkAPI) => {
+    try {
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+          authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
+        },
+      };
+
+      const { data } = await axios.delete(
+        `http://localhost:5000/api/v1/task/${taskId}`,
         config
       );
       return data;

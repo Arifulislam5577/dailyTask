@@ -2,7 +2,12 @@ import React, { useEffect } from "react";
 import { FiTrash2, FiEdit } from "react-icons/fi";
 import { BsCheck2Square } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
-import { getTask } from "../../redux/services/taskService";
+import {
+  deleteTask,
+  getTask,
+  updateTask,
+} from "../../redux/services/taskService";
+import { reset } from "../../redux/features/task/taskSlice";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
 import TableLoader from "../../components/TableLoader";
@@ -11,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 const MyTask = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loading, tasks, error } = useSelector((state) => state.task);
+  const { loading, tasks, error, success } = useSelector((state) => state.task);
 
   TimeAgo.addLocale(en);
   const timeAgo = new TimeAgo("en-US");
@@ -20,9 +25,30 @@ const MyTask = () => {
     navigate("/updateTask", { state: task });
   };
 
+  const handleComplete = (task) => {
+    dispatch(
+      updateTask({
+        isCompleted: true,
+        task: task.task,
+        id: task._id,
+      })
+    );
+
+    dispatch(reset());
+    navigate("/completed");
+  };
+  const handleDelete = (id) => {
+    dispatch(deleteTask(id));
+    dispatch(reset());
+  };
+
   useEffect(() => {
-    dispatch(getTask());
+    dispatch(getTask(false));
   }, [dispatch]);
+
+  useEffect(() => {
+    success && dispatch(getTask(false));
+  }, [dispatch, success]);
 
   if (error) {
     return <ShowError message={error} />;
@@ -77,10 +103,10 @@ const MyTask = () => {
                             <button onClick={() => handleClick(task)}>
                               <FiEdit size="16" />
                             </button>
-                            <button>
+                            <button onClick={() => handleComplete(task)}>
                               <BsCheck2Square size="16" />
                             </button>
-                            <button>
+                            <button onClick={() => handleDelete(task._id)}>
                               <FiTrash2 size="16" />
                             </button>
                           </div>

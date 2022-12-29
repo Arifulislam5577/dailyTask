@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createTask, getTask, updateTask } from "../../services/taskService";
+import {
+  createTask,
+  deleteTask,
+  getTask,
+  updateTask,
+} from "../../services/taskService";
 const initialState = {
   loading: false,
   error: "",
@@ -63,6 +68,23 @@ const taskSlice = createSlice({
     });
 
     builder.addCase(updateTask.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+      state.success = false;
+    });
+    builder.addCase(deleteTask.pending, (state) => {
+      state.loading = true;
+      state.error = "";
+      state.success = false;
+    });
+
+    builder.addCase(deleteTask.fulfilled, (state, action) => {
+      state.loading = false;
+      state.error = "";
+      state.success = true;
+    });
+
+    builder.addCase(deleteTask.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
       state.success = false;

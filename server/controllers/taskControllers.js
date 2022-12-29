@@ -18,7 +18,6 @@ export const getTask = asynHandler(async (req, res) => {
     user: userId,
     isCompleted: isCompleted,
   });
-  console.log(tasks);
   res.status(200).json(tasks);
 });
 
@@ -34,4 +33,9 @@ export const updateTask = asynHandler(async (req, res) => {
     return res.status(404).json({ message: "No Task Found" });
   }
   res.status(200).json({ message: "Task updated successfully" });
+});
+
+export const deleteTask = asynHandler(async (req, res) => {
+  const findTask = await taskModel.findByIdAndDelete(req.params.taskId);
+  res.status(200).json({ message: "Task delete successfully" });
 });
