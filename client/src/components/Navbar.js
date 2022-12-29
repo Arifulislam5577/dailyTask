@@ -33,13 +33,13 @@ const Navbar = () => {
         </div>
         <ul className="lg:flex items-center justify-between gap-5 text-sm dark:text-white hidden">
           <li>
-            <Link to="/addTask">Add Task</Link>
+            <Link to={`/login?redirect=/addTask`}>Add Task</Link>
           </li>
           <li>
-            <Link to="/myTask">My Task</Link>
+            <Link to={`/login?redirect=/myTask`}>My Task</Link>
           </li>
           <li>
-            <Link to="/completed">Completed Task</Link>
+            <Link to={`/login?redirect=/completed`}>Completed Task</Link>
           </li>
           <li>
             {user ? (
@@ -87,13 +87,13 @@ const Navbar = () => {
             <FaTimes size="32" />
           </button>
           <li>
-            <Link to="/addTask">Add Task</Link>
+            <Link to={`/login?redirect=/addTask`}>Add Task</Link>
           </li>
           <li>
-            <Link to="/myTask">My Task</Link>
+            <Link to={`/login?redirect=/myTask`}>My Task</Link>
           </li>
           <li>
-            <Link to="/completed">Completed Task</Link>
+            <Link to={`/login?redirect=/completed`}>Completed Task</Link>
           </li>
           <li>
             {user ? (

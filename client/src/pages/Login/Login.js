@@ -145,7 +145,7 @@ const Login = () => {
                 <p className="text-sm  mt-2 pt-1 mb-0">
                   Don't have an account?
                   <Link
-                    to="/signin"
+                    to={`/signin?redirect=${redirect}`}
                     className="text-red-600 ml-2 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out"
                   >
                     Register

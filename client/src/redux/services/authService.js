@@ -25,7 +25,13 @@ export const createNewUser = createAsyncThunk(
           "https://www.shareicon.net/data/2016/05/24/770107_man_512x512.png",
       });
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -36,7 +42,13 @@ export const googleSignIn = createAsyncThunk(
     try {
       await signInWithPopup(auth, provider);
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -48,7 +60,13 @@ export const loginUser = createAsyncThunk(
       const { email, password } = data;
       await signInWithEmailAndPassword(auth, email, password);
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -75,7 +93,13 @@ export const userInDB = createAsyncThunk(
       );
       return data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );

@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 import userRouter from "./routes/userRouter.js";
+import taskRouter from "./routes/taskRouter.js";
 dotenv.config();
 const app = express();
 
@@ -23,6 +24,7 @@ mongoose.connect(process.env.MONGODB_URL, () => {
 app.get("/", (req, res) => res.send("Hello World!"));
 
 app.use("/api/v1/user", userRouter);
+app.use("/api/v1/task", taskRouter);
 
 // APP STARTED
 const PORT = process.env.PORT || 5000;

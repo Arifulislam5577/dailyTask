@@ -7,6 +7,7 @@ const taskSchema = new Schema(
     user: {
       type: mongoose.Types.ObjectId,
       require: true,
+      ref: "user",
     },
     task: {
       type: String,
