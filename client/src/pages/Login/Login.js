@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { loginUser } from "../../redux/services/authService";
+import { googleSignIn, loginUser } from "../../redux/services/authService";
+import { BsGoogle } from "react-icons/bs";
 import useRedirect from "../../hooks/useRedirect";
 import { useDispatch, useSelector } from "react-redux";
 import ShowError from "../../components/ShowError";
@@ -42,21 +43,13 @@ const Login = () => {
               <div className="flex flex-row items-center justify-center lg:justify-start">
                 <p className="text-lg mb-0 mr-4">Sign in with</p>
                 <button
+                  onClick={() => dispatch(googleSignIn())}
                   type="button"
                   data-mdb-ripple="true"
                   data-mdb-ripple-color="light"
                   className="inline-block p-3 bg-red-500 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-red-600  transition duration-150 ease-in-out mx-1"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 320 512"
-                    className="w-4 h-4"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"
-                    />
-                  </svg>
+                  <BsGoogle />
                 </button>
 
                 <button

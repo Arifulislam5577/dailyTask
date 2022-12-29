@@ -4,10 +4,14 @@ import {
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
-import axios from "axios";
 
+import axios from "axios";
 import { auth } from "../../config/firebase.config";
+
+const provider = new GoogleAuthProvider();
 
 export const createNewUser = createAsyncThunk(
   "Authentication/createUser",
@@ -20,6 +24,17 @@ export const createNewUser = createAsyncThunk(
         photoURL:
           "https://www.shareicon.net/data/2016/05/24/770107_man_512x512.png",
       });
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const googleSignIn = createAsyncThunk(
+  "Authentication/signinwithgoogle",
+  async (data, thunkAPI) => {
+    try {
+      await signInWithPopup(auth, provider);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
