@@ -1,28 +1,29 @@
 import React from "react";
 
-const TaskLayout = () => {
+const TaskLayout = (props) => {
+  const { image, task } = props.task;
   return (
-    <div class="col-span-1 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-      <img class="rounded-t-lg" src="https://picsum.photos/1920/1080" alt="" />
+    <div className="col-span-1 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+      <img className="rounded h-1/2  object-cover w-full" src={image} alt="" />
 
-      <div class="p-5">
-        <h5 class="mb-2 text-base font-bold tracking-tight text-gray-900 dark:text-white">
-          Noteworthy technology acquisitions 2021
+      <div className="p-5">
+        <h5 className="mb-2 text-base font-bold tracking-tight text-gray-900 dark:text-white">
+          {task}
         </h5>
 
-        <button class="inline-flex items-center px-5 py-2 text-xs font-medium text-center text-white bg-slate-700 rounded-full  ">
+        <button className="inline-flex items-center px-5 py-2 text-xs font-medium text-center text-white bg-slate-700 rounded-full  ">
           Read more
           <svg
             aria-hidden="true"
-            class="w-4 h-4 ml-2 -mr-1"
+            className="w-4 h-4 ml-2 -mr-1"
             fill="currentColor"
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              fill-rule="evenodd"
+              fillRule="evenodd"
               d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-              clip-rule="evenodd"
+              clipRule="evenodd"
             ></path>
           </svg>
         </button>

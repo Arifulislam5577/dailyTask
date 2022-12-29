@@ -3,9 +3,7 @@ import asynHandler from "express-async-handler";
 
 export const createTask = asynHandler(async (req, res) => {
   const { user, task } = req.body;
-
   const newTask = await taskModel.create({ user, task });
-
   if (!newTask) {
     return res.status(400).json({ message: "Task creation failed" });
   }

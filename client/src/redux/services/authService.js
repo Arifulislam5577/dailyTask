@@ -87,7 +87,7 @@ export const userInDB = createAsyncThunk(
       };
 
       const { data } = await axios.post(
-        `http://localhost:5000/api/v1/user`,
+        `https://dailytask-server.vercel.app/api/v1/user`,
         {},
         config
       );

@@ -15,7 +15,7 @@ export const createTask = createAsyncThunk(
       const user = thunkAPI.getState().auth.user._id;
 
       const { data } = await axios.post(
-        `http://localhost:5000/api/v1/task`,
+        `https://dailytask-server.vercel.app/api/v1/task`,
         { task, user },
         config
       );
@@ -47,7 +47,7 @@ export const getTask = createAsyncThunk(
       const user = thunkAPI.getState().auth.user._id;
 
       const { data } = await axios.get(
-        `http://localhost:5000/api/v1/task?userId=${user}&isCompleted=${task}`,
+        `https://dailytask-server.vercel.app/api/v1/task?userId=${user}&isCompleted=${task}`,
         config
       );
       return data;
@@ -62,6 +62,7 @@ export const getTask = createAsyncThunk(
     }
   }
 );
+
 export const updateTask = createAsyncThunk(
   "Task/updateTask",
   async (taskData, thunkAPI) => {
@@ -75,7 +76,7 @@ export const updateTask = createAsyncThunk(
       };
 
       const { data } = await axios.patch(
-        `http://localhost:5000/api/v1/task/${id}`,
+        `https://dailytask-server.vercel.app/api/v1/task/${id}`,
         {
           task,
           isCompleted,
@@ -107,7 +108,7 @@ export const deleteTask = createAsyncThunk(
       };
 
       const { data } = await axios.delete(
-        `http://localhost:5000/api/v1/task/${taskId}`,
+        `https://dailytask-server.vercel.app/api/v1/task/${taskId}`,
         config
       );
       return data;
